@@ -1,0 +1,25 @@
+{
+    "name": "Bruno/newsletter-navegation",
+    "description": "Navegate through folders and generate a navegation panel",
+    "authors": [
+        {
+            "name": "Bruno Barros",
+            "email": "brunodanca@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+
+        ],
+        "psr-0": {
+            "Newsnav": "app/"
+        }
+    },
+    "minimum-stability": "dev",
+
+    "require": {
+        "phpunit/php-file-iterator": "dev-master",
+        "symfony/http-foundation": "2.5.*@dev",
+        "sunra/php-simple-html-dom-parser": "v1.5.0"
+    }
+}
