@@ -13,7 +13,7 @@ Navigation through static html files organized in folders. Originaly made to nav
 
 On folder `pages` create subfolders and put the `index.html`.
 The `<title>` will be used to build the page link.
-`|` (pipes) are converted to `<br>` and stores on `htmlTitle` attribute on Page object.
+`|` (pipes) are converted to `<br>` and stored on `htmlTitle` attribute on Page object.
 
 ## Configurations
 
