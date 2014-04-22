@@ -4,6 +4,11 @@
 
     <link rel="stylesheet" href="<?php echo site_url('assets/css/jquery.sidr.light.css') ?>"/>
     <link rel="stylesheet" href="<?php echo site_url('assets/css/style.css') ?>"/>
+
+    <!--[if lt IE 9]>
+    <script src="<?php echo site_url('assets/js/html5shiv.respond.min.js') ?>"></script>
+    <![endif]-->
+
     <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="<?php echo site_url('assets/js/jquery.sidr.js') ?>"></script>
 
