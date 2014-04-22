@@ -11,6 +11,7 @@ use Newsnav\UrlParser;
 
 class Page
 {
+    private $app;
     /**
      * @var int
      */
@@ -45,8 +46,14 @@ class Page
      */
     protected $dom;
 
-    function __construct($dir)
+    function __construct($app, $dir = null)
     {
+        if($dir === null)
+        {
+            $dir = $app;
+            $app = null;
+        }
+        $this->app = $app;
         $this->dir = $dir;
         $this->parse();
     }
@@ -61,7 +68,7 @@ class Page
 
         $this->order = self::$count;
 
-        $this->dom = HtmlDomParser::file_get_html($this->dir . '/index.html');
+        $this->dom = HtmlDomParser::file_get_html($this->dir .'/'. $this->app->getConfig('index'));
 
         $title = $this->dom->find('title');
 
@@ -72,7 +79,8 @@ class Page
         $urlParser = new UrlParser(null);
         $active = $urlParser->getActivePageFolder();
 
-        $this->isActive = ($active === $this->getFolder()) ? true : false;
+        $this->isActive = ($active === null && $this->order === 1) ? true :
+            ($active === $this->getFolder()) ? true : false;
 
 
 

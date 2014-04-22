@@ -12,6 +12,10 @@ use Newsnav\Page;
 class App
 {
 
+    /**
+     * @var array
+     */
+    protected $configs = array();
 
     /**
      * @var array
@@ -42,6 +46,17 @@ class App
         foreach ($paths as $abstract => $path)
         {
             $this->paths[$abstract] = $path;
+        }
+    }
+
+    /**
+     * @param array $configs
+     */
+    public function loadConfiguration(array $configs)
+    {
+        foreach ($configs as $key => $value)
+        {
+            $this->configs[$key] = $value;
         }
     }
 
@@ -85,6 +100,30 @@ class App
         {
             return $this->paths[$abstract];
         }
+
+        return null;
+    }
+
+
+    /**
+     * return the configuration
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function getConfig($key = null)
+    {
+        if($key === null)
+        {
+            return $this->configs;
+        }
+
+        if (array_key_exists($key, $this->configs))
+        {
+            return $this->configs[$key];
+        }
+
+        return null;
     }
 
     public function run()
@@ -97,6 +136,7 @@ class App
         //        var_dump($this->pages);
         //        die;
 
+        $this->template->set('config', $this->getConfig());
         $this->template->set('pages', $this->getPages());
         $this->template->set('page', $this->request->activePage());
 
@@ -122,7 +162,7 @@ class App
         {
             if ($file->isDir() && !$file->isDot())
             {
-                $this->pages[] = new Page($file->getPathname());
+                $this->pages[] = new Page($this, $file->getPathname());
             }
         }
 
