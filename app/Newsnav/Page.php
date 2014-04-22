@@ -15,7 +15,23 @@ class Page
      * @var int
      */
     static public $count = 0;
-
+    /**
+     * is the page is open
+     * @var bool
+     */
+    public $isActive = false;
+    /**
+     * @var string
+     */
+    public $title = '';
+    /**
+     * @var string
+     */
+    public $htmlTitle = '';
+    /**
+     * @var string
+     */
+    public $folder = '';
     /**
      * @var int
      */
@@ -25,34 +41,14 @@ class Page
      */
     protected $dir = '';
     /**
-     * is the page is open
-     * @var bool
-     */
-    public $isActive = false;
-    /**
      * @var
      */
     protected $dom;
-    /**
-     * @var string
-     */
-    public $title = '';
-
-    /**
-     * @var string
-     */
-    public $folder = '';
 
     function __construct($dir)
     {
         $this->dir = $dir;
         $this->parse();
-    }
-
-    public function __toString(){
-        $t = $this->dom->find('title');
-        $t[0] = null;
-        return (string)$this->dom;
     }
 
     /**
@@ -83,27 +79,11 @@ class Page
     }
 
     /**
-     * @return int
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * @return string
      */
-    public function getTitle()
+    public function getFolder()
     {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
+        return $this->folder;
     }
 
     /**
@@ -124,9 +104,50 @@ class Page
     /**
      * @return string
      */
-    public function getFolder()
+    public function getHtmlTitle()
     {
-        return $this->folder;
+        return $this->htmlTitle;
+    }
+
+    /**
+     * @param string $htmlTitle
+     */
+    public function setHtmlTitle($htmlTitle)
+    {
+        // '|' == <br>
+        $htmlTitle = str_replace('|', '<br>', $htmlTitle);
+        $this->htmlTitle = $htmlTitle;
+    }
+
+    public function __toString(){
+        $t = $this->dom->find('title');
+        $t[0] = null;
+        return (string)$this->dom;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->setHtmlTitle($title);
+        $this->title = $title;
     }
 
 

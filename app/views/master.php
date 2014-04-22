@@ -27,7 +27,7 @@
             foreach ($pages as $p):
                 ?>
                 <li class="<?php echo ($p->isActive) ? 'active' : ''?>">
-                    <a href="<?php echo site_url($p->folder)?>"><?php echo $p->title?></a>
+                    <a href="<?php echo site_url($p->folder)?>"><?php echo $p->htmlTitle?></a>
                 </li>
             <?php
             endforeach;
